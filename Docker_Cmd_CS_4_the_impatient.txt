@@ -1,0 +1,80 @@
+=== Docker-Command-CheatSheet-4-the-Impatient ===
+
+Commands:
+run - Run docker rommands
+-P | Map any required network ports inside a container to the host.
+-t | Assigns a pseudo-tty or terminal inside a containter
+-i | Makes an interactive connection by grabbing the standard in (STDIN) of the container
+-d | "daemonize" command (run in background)
+-v | Shared volume
+logs - Show standard output
+- f | Tail -f equivalent of linux
+ 
+ps - Show docker processes
+-l | Return details of last container started
+-a | Show all containers
+
+top - Examine running processes
+
+inspect - Produces a JSON hash of configuration and status information about containers
+
+stop - Stop container
+
+restart - Restart a container
+
+rm - Remove a container
+
+rmi - Remove image (docker rmi <image id>
+
+push - Push image to docker repository
+
+images - List images on the host
+
+pull - Pull docker images
+
+commit - Commit docker image
+-m | specifies a commit message
+-a | Specify an author
+tag - Tag an image
+build - Build a docker image from scratch
+
+boot2docker ip - Get ip of docker container
+
+
+EXAMPLES:
+# Opens a container to echo "hello world" as a single process then stops the container. 
+docker run ubuntu:14.04 /bin/echo 'Hello world'
+
+# Puts you in a bash shell
+docker run -t -i ubuntu:14.04 /bin/bash
+
+# Creates a process to echo "hello world" as a daemon
+docker run -d ubuntu:14.04 /bin/sh -c "while true; do echo hello world; sleep 1; done"
+
+# Return standard output of container.
+docker logs <options> <unique_name>
+
+# Stop container by name
+docker stop <unique_name>
+
+# Re-map a network port:
+docker run -d -p 5000:5000 training/webapp python app.py
+
+# Get the docker port of a container by unique name
+docker port <unique_name> 5000
+
+# Examine running processes inside a docker system
+docker top nostalgic_morse
+
+# Commit image to docker hub
+docker commit -m="Added json gem" -a="Kate Smith" 0b2616b0e5a8 ouruser/sinatra:v2
+
+# Docker tag
+docker tag 5db5f8471261 ouruser/sinatra:devel
+
+# Push image to docker repo
+docker push ouruser/sinatra
+
+
+Terminology:
+container id | Uniquely identifies a container so we can work with it. (Automatically assigned)
